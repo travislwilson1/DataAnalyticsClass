@@ -1,0 +1,61 @@
+CREATE TABLE twilson.airbnb
+(
+    room_id bigint NOT NULL,
+	survey_id integer,
+    host_id integer,
+    room_type text COLLATE pg_catalog."default",
+	country text COLLATE pg_catalog."default",
+	city text COLLATE pg_catalog."default",
+	borough text COLLATE pg_catalog."default",
+    neighborhood text COLLATE pg_catalog."default",
+    reviews integer,
+    overall_satisfaction real,
+    accommodates integer,
+    bedrooms real,
+    bathrooms real,
+    price integer,
+    minstay integer,
+    name text COLLATE pg_catalog."default",
+    created_date timestamp with time zone,
+	latitude float8,
+	longitude float8,
+	location text COLLATE pg_catalog."default",
+    CONSTRAINT airbnb_pkey PRIMARY KEY (room_id)
+)
+
+
+Select Min(price) as Big_Money
+from twilson.airbnb;
+
+Select Round(Avg(reviews),2) as review_big_money
+from twilson.airbnb;
+
+select * from twilson.airbnb
+
+select avg(overall_satisfaction)
+	from twilson.airbnb
+	Where overall_satisfaction >0;
+
+Select 
+	room_type,
+	accommodates,
+	round (avg(price),2) as average_price,
+	max(price) as max_price
+From twilson.airbnb
+where neighborhood = 'Girdwood'
+group by
+	room_type,
+	accommodates
+Order by
+	room_type,
+	accommodates;
+	
+	
+Select review in neighborhood by neighborhood
+
+select 
+	neighborhood,
+	max(reviews) as max_review	
+from twilson.airbnb
+group by neighborhood
+Order by max_review desc;
